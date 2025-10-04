@@ -11,6 +11,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: linear-gradient(135deg, #2e0151 0%, #13053f 100%), url('assets/images/space-light.png');
+  background-size: cover;
 }
 
 a {

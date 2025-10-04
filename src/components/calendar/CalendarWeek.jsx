@@ -5,7 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import './CalendarWeek.css'
 
-export default function FullCalendarView({ events = [] }) {
+export default function CalendarWeek({ events = [] }) {
   const calendarRef = useRef(null)
   const [daysToShow, setDaysToShow] = useState(
 		() => selectDaysToShow(typeof window !== 'undefined' ? window.innerWidth : 1024)

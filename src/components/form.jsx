@@ -7,7 +7,7 @@ export default function Form({ closeForm, showForm }) {
     const[deadline, setDeadline] = React.useState(false);
 
     return (
-        <form action="/action_page.php" className={showForm ? "add-task-form" : "add-task-form hidden"}>
+        <form className={showForm ? "add-task-form" : "add-task-form hidden"}>
             <h3>Add Task</h3>
 
             <label htmlFor="Name"><b>Task Name</b></label>

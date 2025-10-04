@@ -1,16 +1,35 @@
-import { NavLink } from 'react-router-dom'
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import Form from '../components/form.jsx';
 
 export default function Home() {
-  return (
-    <div>
-      <h2>Welcome to Planit</h2>
-      <p>This is the home page where you can see quick stats and add tasks.</p>
+  const [showForm, setShowForm] = useState(false);
 
-      <nav>
-        <NavLink to="/calendar" className={({isActive}) => isActive ? 'active' : ''}>
-          Calendar
-        </NavLink>
-      </nav>
-    </div>
-  )
+  function openForm() {
+    setShowForm(true);
+    return <Form />;
+  }
+
+  function closeForm() {
+    setShowForm(false);}
+
+  return (
+    <>
+      <div>
+        <h2>Welcome to Planit</h2>
+        <p>This is the home page where you can see quick stats and add tasks.</p>
+        <div>
+          <button className='add task' onClick={() => openForm()}>
+            Add Task
+          </button>
+        </div>
+        {showForm && <Form closeForm={closeForm} showForm={showForm} />}
+        <nav>
+          <NavLink to="/calendar" className={({isActive}) => isActive ? 'active' : ''}>
+            Calendar
+          </NavLink>
+        </nav>
+      </div>
+    </>
+  );
 }

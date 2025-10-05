@@ -21,18 +21,21 @@ export default function Home() {
       <div className='homepage-body'>
         <div class="planet" />
         <h2 className='homepage-title'>Welcome to Planit</h2>
-        <p>This is the home page where you can see quick stats and add tasks.</p>
-        <div>
-          <button className='homepage-button' onClick={() => openForm()}>
-            <div class="rocket" />  Add Task
-          </button>
+        <div className='homepage-button-container'  style={{marginTop: 20}}>
+          <div>
+            <button className='homepage-button' onClick={() => openForm()}>
+              <div class="rocket" style={{marginRight: 10}} /> Add Task
+            </button>
+          </div>
+          {showForm && <Form closeForm={closeForm} showForm={showForm} />}
+          <nav style={{marginTop: 10}}>
+            <NavLink to={`/calendar/${window.localStorage.getItem('planner-scheduleId')}`} className={({isActive}) => isActive ? 'active' : ''}>
+              <button className='homepage-button'>
+                <div class="moon" style={{marginRight: 10}} /> Calendar
+              </button>
+            </NavLink>
+          </nav>
         </div>
-        {showForm && <Form closeForm={closeForm} showForm={showForm} />}
-        <nav>
-          <NavLink to={`/calendar/${window.localStorage.getItem('planner-scheduleId')}`} className={({isActive}) => isActive ? 'active' : ''}>
-            Calendar
-          </NavLink>
-        </nav>
       </div>
     </>
   );

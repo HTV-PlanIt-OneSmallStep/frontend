@@ -94,6 +94,12 @@ button:focus-visible {
   background-color: #ffffff;
 }
 
+.homepage-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -107,7 +113,6 @@ button:focus-visible {
     font-family: 'Trebuchet MS', sans-serif;
     display: flex;
     width: fit-content;
-    margin-left: 43%;
     height: fit-content;
     align-items: center;
     justify-content: center;;

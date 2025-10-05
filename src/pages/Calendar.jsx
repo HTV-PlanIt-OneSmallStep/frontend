@@ -40,7 +40,7 @@ export default function Calendar() {
       </nav>
       <div className='row'>
         <Task taskId={taskId} scheduleId={scheduleId}/>
-        <CalendarWeek events={events} setWeeks={setWeeks}/>
+        <CalendarWeek events={events} setWeeks={setWeeks} setTaskId={setTaskId}/>
       </div>
     </div>
   )

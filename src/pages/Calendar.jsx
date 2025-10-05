@@ -10,6 +10,8 @@ import { getTasksInTimestampRange } from '../api/logic.js'
 
 const sampleEvents = subtaskListToEvents(sampleSubtasks)
 
+// const events = useState([])
+
 export default function Calendar() {
 
   const { scheduleId } = useParams();

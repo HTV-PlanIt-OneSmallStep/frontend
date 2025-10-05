@@ -16,7 +16,7 @@ export default function Calendar() {
 
   const { scheduleId } = useParams();
   const [events, setEvents] = useState([])
-  const [week, setWeeks] = useState(['2025-10-01', '2025-10-07'])
+  const [week, setWeeks] = useState(['2025-12-01', '2025-12-07'])
 
   const [taskId, setTaskId] = useState(null);
 
@@ -29,7 +29,7 @@ export default function Calendar() {
 
   useEffect(() => {
     refreshTasks();
-  }, [scheduleId])
+  }, [scheduleId, week])
 
   return (
     <div>

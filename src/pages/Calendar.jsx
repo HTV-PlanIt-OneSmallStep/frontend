@@ -5,9 +5,14 @@ import Task from '../components/task/Task'
 import { sampleSubtasks } from '../util/constants'
 import { subtaskListToEvents } from '../util/helpers'
 
+import { useState, useEffect } from 'react'
+
 const sampleEvents = subtaskListToEvents(sampleSubtasks)
 
+// const events = useState([])
+
 export default function Calendar() {
+
   return (
     <div>
       <nav className="page-nav">

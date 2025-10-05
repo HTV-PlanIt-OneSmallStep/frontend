@@ -41,7 +41,6 @@ export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
         const cur = api.getDate()
         const d = new Date(cur)
         d.setDate(d.getDate() - daysToSkip)
-        setWeeks([d.toISOString().slice(0,10),new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)]) // end date not used
         api.gotoDate(d)
       }
     },
@@ -53,7 +52,6 @@ export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
         const cur = api.getDate()
         const d = new Date(cur)
         d.setDate(d.getDate() + daysToSkip)
-        setWeeks([d.toISOString().slice(0,10),new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)]) // end date not used
 
         api.gotoDate(d)
       }
@@ -62,6 +60,8 @@ export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
 
   function handleDatesSet(info) {
     if (!info) return
+    console.log("SETTING WEEKS", [info.startStr, info.endStr])
+    setWeeks([info.startStr, info.endStr])
 		scrollTo9am();
   }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Form from '../components/form/form.jsx';
+import './../index.css'
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
@@ -15,18 +16,20 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <h2>Welcome to Planit</h2>
+      <div className='homepage-body'>
+        <div class="planet" />
+        <h2 className='homepage-title'>Welcome to Planit</h2>
         <p>This is the home page where you can see quick stats and add tasks.</p>
         <div>
-          <button className='add task' onClick={() => openForm()}>
-            Add Task
+          <button className='homepage-button' onClick={() => openForm()}>
+            <div class="rocket" />  Add Task
           </button>
         </div>
         {showForm && <Form closeForm={closeForm} showForm={showForm} />}
         <nav>
+
           <NavLink to="/calendar" className={({isActive}) => isActive ? 'active' : ''}>
-            Calendar
+            < div class='moon' />Calendar
           </NavLink>
         </nav>
       </div>

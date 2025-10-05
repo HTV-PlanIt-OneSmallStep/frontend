@@ -16,6 +16,39 @@
   background-size: cover;
 }
 
+.planet {
+  background-image: url('./assets/images/planet.png');
+  background-size: contain;
+  display: flex;
+  position: relative;
+  object-fit: fill;
+  width:200px;
+  height:200px;
+  margin: auto;
+}
+
+.rocket {
+  background-image: url('./assets/images/rocket.png');
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+}
+
+.moon {
+  background-image: url('./assets/images/moon.png');
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+}
+
+.homepage-title {
+  font-size: 2.5em;
+  color: #ffffff;
+  font-family: 'Trebuchet MS';
+  margin: auto;
+  text-align: center;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -57,6 +90,10 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.navlink {
+  background-color: #ffffff;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -66,6 +103,13 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #baa9f2;
+    font-family: 'Trebuchet MS', sans-serif;
+    display: flex;
+    width: fit-content;
+    margin-left: 43%;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;;
   }
 }

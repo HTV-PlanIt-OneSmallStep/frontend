@@ -20,7 +20,9 @@ export default function CalendarWeek({ events = [], setWeeks = () => {}, setTask
       title: e.title,
       start: `${e.date}T${e.start}`,
       end: e.end ? `${e.date}T${e.end}` : undefined,
-      taskId: e.parent.id
+      taskId: `${e.parent.id}`,
+      backgroundColor: '#4f46e5', // event background
+      textColor: '#ffffff',        // text color,
     })))
   }, [events]);
 
@@ -56,9 +58,16 @@ export default function CalendarWeek({ events = [], setWeeks = () => {}, setTask
 
         api.gotoDate(d)
       }
+    },
+    today: {
+      text: 'Today',
+      click: () => {
+        const api = calendarRef.current?.getApi()
+        if (!api) return
+        api.gotoDate(new Date(Date.now()))
+      }
     }
   }
-
   function handleDatesSet(info) {
     if (!info) return
     console.log("SETTING WEEKS", [info.startStr, info.endStr])
@@ -80,8 +89,8 @@ export default function CalendarWeek({ events = [], setWeeks = () => {}, setTask
         const prev = api.getEventById(String(lastHighlightedId.current))
         if (prev && typeof prev.setProp === 'function') {
           // reset to default
-          prev.setProp('backgroundColor', '')
-          prev.setProp('borderColor', '')
+        prev.setProp('backgroundColor', '#4f46e5')
+        prev.setProp('textColor', '#ffffffff')
         } else {
           // fallback: remove DOM class
           const prevEl = document.querySelector(`.fc-event[data-event-id="${lastHighlightedId.current}"]`)
@@ -91,8 +100,8 @@ export default function CalendarWeek({ events = [], setWeeks = () => {}, setTask
 
       const ev = api.getEventById(String(id))
       if (ev && typeof ev.setProp === 'function') {
-        ev.setProp('backgroundColor', '#ffef8a')
-        ev.setProp('borderColor', '#ffcf33')
+        ev.setProp('backgroundColor', '#3bb9ebff')
+        ev.setProp('textColor', '#fff4cfff')
       } else {
         // fallback: add DOM class to event element(s)
         const el = document.querySelectorAll(`.fc-event[data-event-id="${id}"]`)
@@ -116,7 +125,7 @@ export default function CalendarWeek({ events = [], setWeeks = () => {}, setTask
         customButtons={customButtons}
 				headerToolbar={{ left: 'today', center: 'title', right: 'prev,next'}}
         selectable={true}
-        eventClick={(i) => { console.log(i); setTaskId(fcEvents.find((e) => e.id == i.event.id).taskId) }}
+        eventClick={(i) => { console.log(i); ; setTaskId(fcEvents.find((e) => e.id == i.event.id).taskId) }}
         events={fcEvents}
 				allDaySlot={true}
 				nowIndicator={true}

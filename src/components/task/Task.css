@@ -6,7 +6,30 @@
   box-sizing: border-box;
 }
 
+.text-white {
+  color: rgb(209, 201, 255);
+}
+
 .subtask-list {
   display: flex;
   flex-direction: column;
+}
+
+.header {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+}
+
+.subheader {
+  color: white;
+  font-size: 1.5em;
+}
+
+.no-task-text {
+  justify-self: center;
+  text-align: center;
+  color: #dbdbdb;
+  font-size: 1.2em;
+  margin-top: 50px;
 }

@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const apiClient = axios.create(
     {
-        baseURL: 'localhost:3000',//process.env.REACT_APP_BACKEND_URL,
+        baseURL: 'http://localhost:3000',//process.env.REACT_APP_BACKEND_URL,
         timeout: 1000
     }
 )
@@ -10,7 +10,7 @@ export const apiClient = axios.create(
 
 export const apiTaskClient = axios.create(
     {
-        baseURL: `localhost:3000/api/plan/schedule`,
+        baseURL: `http://localhost:3000/api/plan/schedule`,
         timeout: 1000
     }
 )

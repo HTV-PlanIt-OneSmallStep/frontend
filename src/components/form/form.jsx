@@ -57,13 +57,9 @@ export default function Form({ closeForm, showForm }) {
         }));
     }
 
-    function showEndDateTime() {
+    function showEndDate() {
         return (
-            <div className='date-time-row' id="end-date-tme-row">
-                <label htmlFor='end' className='input-label'> <b>End Date</b> </label>
-                <input type="date" name="endDate" id="end-date" value={formData.EndDate} min={getCurrentDate} onChange={handleEndDateChange}/>
-                <input type="time" name="endTime" id="end-time" value={formData.EndTime} onInput={handleEndTimeChange} />
-            </div>
+            <input type="date" name="endDate" id="end-date" value={formData.EndDate} min={formData.startDate} onChange={handleEndDateChange}/>
         )
     }
 
@@ -79,7 +75,7 @@ export default function Form({ closeForm, showForm }) {
             <div className="form-body">
                 <div className='task-section'>
                     <label htmlFor="Name" className='input-label'><b>Task Name  </b></label>
-                    <input type="text" id="task-name" placeholder={formData.taskName} name="Name\t" onInput={handleNameChange} required />
+                    <input type="text" id="task-name" className='input-text' placeholder={formData.taskName} name="Name\t" onInput={handleNameChange} required />
                 </div>
                 <div className='task-section'>
                     <label htmlFor="deadline" className='input-label'><b>Add Deadline  </b></label>
@@ -92,7 +88,7 @@ export default function Form({ closeForm, showForm }) {
                 <div >
                     <div className='date-time-row'>
                         <label htmlFor="start" className='input-label'>
-                            <b>{formData.addDeadline ? "Start Date\t" : "Date\t"}</b>
+                            <b>{formData.addDeadline ? "Start Date" : "Start Time"}</b>
                         </label>
                         <input type="date" name="beginDate" value={formData.startDate} id="start-date" min="2025-10-05" onChange={handleStartDateChange}/>
                         <input type="time" name="beginTime" id="start-time" onInput={handleStartTimeChange}/>
@@ -105,8 +101,12 @@ export default function Form({ closeForm, showForm }) {
                             </div> */}
                         </div>
                     </div>
+                    <div className='date-time-row' id="end-date-tme-row">
+                        <label htmlFor='end' className='input-label'> <b>{formData.addDeadline ? "End Date" : "End Time" }</b> </label>
+                        {formData.addDeadline && showEndDate()}
+                        <input type="time" name="endTime" id="end-time" value={formData.EndTime} onInput={handleEndTimeChange} />
+                    </div>
 
-                    {formData.addDeadline && showEndDateTime()}
                 </div>
             </div>
 

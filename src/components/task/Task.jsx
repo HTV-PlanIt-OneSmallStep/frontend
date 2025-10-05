@@ -10,7 +10,7 @@ function isOverdue(dueDate) {
   return new Date(dueDate) < new Date();
 }
 
-const Task = ({ taskId }) => {
+const Task = ({ taskId, refresh, events }) => {
   const { name, context: description } = sampleTask; // getTask(taskId);
   const [subtasks, setSubtasks] = useState([])
   const { scheduleId } = useParams();
@@ -37,19 +37,26 @@ const Task = ({ taskId }) => {
 
   return (
     <div className="task-outer">
-      <h2>{task.name}</h2>
-      <p>{task.context}</p>
-      <h4>Subtasks</h4>
-      <div className="subtask-list">
-        {subtasks?.map(subtask => (
-          <SubtaskPill
-            key={subtask.eventId}
-            id={subtask.eventId}
-            title={subtask.name}
-            eventId={subtask.eventId}
-          />
-        ))}
-      </div>
+      {
+        taskId ?
+      <>
+        <h2 className='header'>{task.name}</h2>
+        <p className='text-white'>{task.context}</p>
+        <h4 className='subheader'>Subtasks</h4>
+        <div className="subtask-list">
+          {subtasks?.map(subtask => (
+            <SubtaskPill
+              key={subtask.eventId}
+              id={subtask.eventId}
+              title={subtask.name}
+              eventId={subtask.eventId}
+            />
+          ))}
+        </div>
+      </>
+      : <div className='header text-white no-task-text'><h4>No task selected</h4></div>
+      }
+
     </div>
   );
 }

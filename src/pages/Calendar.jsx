@@ -16,7 +16,7 @@ export default function Calendar() {
 
   const { scheduleId } = useParams();
   const [events, setEvents] = useState([])
-  const [week, setWeeks] = useState(['2025-12-01', '2025-12-07'])
+  const [week, setWeeks] = useState([(new Date()).toISOString(), (new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)).toISOString()])
 
   const [taskId, setTaskId] = useState(null);
 
@@ -31,6 +31,10 @@ export default function Calendar() {
     refreshTasks();
   }, [scheduleId, week])
 
+  useEffect(() => {
+    refreshTasks();
+  }, [])
+
   return (
     <div>
       <nav className="page-nav">
@@ -38,8 +42,8 @@ export default function Calendar() {
           Home
         </NavLink>
       </nav>
-      <div className='row'>
-        <Task taskId={taskId} scheduleId={scheduleId}/>
+      <div className='row' style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16}}>
+        <Task events={events} taskId={taskId} scheduleId={scheduleId}/>
         <CalendarWeek events={events} setWeeks={setWeeks} setTaskId={setTaskId}/>
       </div>
     </div>

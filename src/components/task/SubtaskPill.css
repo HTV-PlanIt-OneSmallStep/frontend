@@ -2,14 +2,18 @@
   display: inline-block;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #f0f0f0;
-  color: #111;
-  border: 1px solid #ddd;
+  background: inherit;
+  color: #eeeeee;
+  border: 3px solid #ddd;
   cursor: pointer;
   margin: 4px 6px 4px 0;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 .subtask-pill:hover {
-  background: #e8e8ff;
+  background: #c1a8fc;
+  color:rgb(67, 22, 109);
+  border: 3px solid rgb(67, 22, 109);
+
 }

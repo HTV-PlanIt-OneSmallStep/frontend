@@ -6,3 +6,60 @@
   min-width: 0;
   overflow: auto;
 }
+
+
+.fc .fc-toolbar-title {
+  color: #e6d0ff;  /* light blue */
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+/* Make the time labels white */
+.fc .fc-timegrid-slot-label {
+  color: white !important;
+}
+
+
+.fc .fc-col-header-cell, .fc .fc-timegrid-axis {
+  background-color: inherit;  /* dark gray background */
+  color:rgb(242, 226, 255) !important;
+  font-weight: 600;           /* bold text */
+  text-align: center;
+  padding: 0.5rem;
+  border: 1px solid #374151;  /* subtle border */
+}
+
+.fc .fc-col-header-cell * {
+  color:rgb(242, 226, 255) !important;
+}
+
+/* Target the scroll container in timeGrid view */
+.fc .fc-scroller {
+  scrollbar-width: thin;      /* Firefox */
+  scrollbar-color: white #2c055e; /* Firefox: thumb color / track color */
+}
+
+/* Chrome, Edge, Safari */
+.fc .fc-scroller::-webkit-scrollbar {
+  width: 8px;                 /* scrollbar width */
+}
+
+.fc .fc-scroller::-webkit-scrollbar-track {
+  background: #1f2937;        /* track color */
+  border-radius: 4px;
+}
+
+.fc .fc-scroller::-webkit-scrollbar-thumb {
+  background-color: white;  /* thumb color */
+  border-radius: 4px;
+  border: 2px solid #1f2937;  /* optional padding around thumb */
+}
+
+.fc .fc-scroller::-webkit-scrollbar-thumb:hover {
+  background-color: #852fd4;  /* darker on hover */
+}
+
+/* For timeGrid events specifically */
+.fc .fc-timegrid-event {
+  padding: 4px 6px;       /* slightly smaller padding for narrow blocks */
+}

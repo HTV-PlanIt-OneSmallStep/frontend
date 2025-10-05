@@ -5,7 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import './CalendarWeek.css'
 
-export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
+export default function CalendarWeek({ events = [], setWeeks = () => {}, setTaskId = () => {} }) {
   const calendarRef = useRef(null)
   const [daysToShow, setDaysToShow] = useState(
 		() => selectDaysToShow(typeof window !== 'undefined' ? window.innerWidth : 1024)
@@ -20,6 +20,7 @@ export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
       title: e.title,
       start: `${e.date}T${e.start}`,
       end: e.end ? `${e.date}T${e.end}` : undefined,
+      taskId: e.parent.id
     })))
   }, [events]);
 
@@ -73,7 +74,7 @@ export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
       if (!id) return
       const api = calendarRef.current?.getApi()
       if (!api) return
-
+      console.log("HIGHLIGHT EVENT", id, api, e)
       // clear previous highlight
       if (lastHighlightedId.current) {
         const prev = api.getEventById(String(lastHighlightedId.current))
@@ -111,10 +112,11 @@ export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
       <FullCalendar
         ref={calendarRef}
         plugins={[ timeGridPlugin, dayGridPlugin, interactionPlugin ]}
-        initialView="timeGrid"
+        initialView="timeGridWeek"
         customButtons={customButtons}
 				headerToolbar={{ left: 'today', center: 'title', right: 'prev,next'}}
         selectable={true}
+        eventClick={(i) => { console.log(i); setTaskId(fcEvents.find((e) => e.id == i.event.id).taskId) }}
         events={fcEvents}
 				allDaySlot={true}
 				nowIndicator={true}

@@ -13,6 +13,8 @@ export default function Home() {
   function closeForm() {
     setShowForm(false);}
 
+
+
   return (
     <>
       <div>
@@ -25,7 +27,7 @@ export default function Home() {
         </div>
         {showForm && <Form closeForm={closeForm} showForm={showForm} />}
         <nav>
-          <NavLink to="/calendar" className={({isActive}) => isActive ? 'active' : ''}>
+          <NavLink to={`/calendar/${window.localStorage.getItem('planner-scheduleId')}`} className={({isActive}) => isActive ? 'active' : ''}>
             Calendar
           </NavLink>
         </nav>

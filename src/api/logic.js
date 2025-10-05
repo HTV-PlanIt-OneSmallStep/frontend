@@ -64,7 +64,7 @@ export const getTasksInTimestampRange = async (scheduleId, s, e) => {
                         title: task.name,
                         description: task.description,
                         parent: task.parent,
-                        eventId: task.id + `${dateSplitS[0]}${dateSplitS[0]}`
+                        eventId: task.id
                     }
                 )
                 acc.push(
@@ -76,7 +76,7 @@ export const getTasksInTimestampRange = async (scheduleId, s, e) => {
                         title: task.name,
                         description: task.description,
                         parent: task.parent,
-                        eventId: task.id + `${dateSplitE[0]}${dateSplitE[0]}`
+                        eventId: task.id + `${Math.random().toString().slice(2,5)}`
                     }
                 )
                 getDaysBetween(dateSplitS[0], dateSplitE[0]).forEach(d => acc.push(
@@ -88,7 +88,7 @@ export const getTasksInTimestampRange = async (scheduleId, s, e) => {
                         title: task.name,
                         description: task.description,
                         parent: task.parent,
-                        eventId: task.id + `${d}`
+                        eventId: task.id + `${Math.random().toString().slice(2,5)}`
 
                     })
                 )
@@ -102,7 +102,7 @@ export const getTasksInTimestampRange = async (scheduleId, s, e) => {
                         title: task.name,
                         description: task.description,
                         parent: task.parent,
-                        eventId: task.id + `${dateSplitE[1]}${dateSplitS[0]}`
+                        eventId: task.id
                     }
                 )
             }
@@ -168,7 +168,7 @@ export const getSubtasksByTaskId = async (scheduleId, taskId) => {
     const r = await apiTaskClient.get(`${scheduleId}/task/${taskId}/subtasks`);
     console.log(r)
     if (r.data) {
-        return r.data
+        return r.data.map(t => ({...t, eventId: t.id }))
     } else {
         return []
     }
@@ -228,7 +228,7 @@ export const setSubtask = async (scheduleId, taskId, subtaskId, fields) => {
 returns { id: 'UUID', userId: 'UUID' }
 */
 export const createSchedule = async () => {
-    return (await apiClient.post('/')).data;
+    return (await apiTaskClient.post('/')).data;
 }
 
 export default {

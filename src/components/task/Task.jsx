@@ -18,7 +18,7 @@ const Task = ({ taskId }) => {
   const refreshSubtasks = async () => {
     if (!taskId) return;
     const t = await getSubtasksByTaskId(scheduleId, taskId);
-    console.log
+    console.log("Got Subtasks", t)
     setSubtasks(t || []);
   }
 
@@ -30,6 +30,7 @@ const Task = ({ taskId }) => {
   }
 
   useEffect(() => {
+    console.log("TASK ID CHANGED", taskId)
     refreshTask()
     refreshSubtasks()
   }, [taskId]);

@@ -5,19 +5,23 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import './CalendarWeek.css'
 
-export default function CalendarWeek({ events = [] }) {
+export default function CalendarWeek({ events = [], setWeeks = () => {} }) {
   const calendarRef = useRef(null)
   const [daysToShow, setDaysToShow] = useState(
 		() => selectDaysToShow(typeof window !== 'undefined' ? window.innerWidth : 1024)
 	)
 	const daysToSkip = useMemo(() => daysToShow === 7 ? 7 : 1, [daysToShow])
 
-  const fcEvents = events.map(e => ({
-    id: e.id,
-    title: e.title,
-    start: `${e.date}T${e.start}`,
-    end: e.end ? `${e.date}T${e.end}` : undefined,
-  }))
+  const [fcEvents, setFcEvents] = useState([]);
+  
+  useEffect(() => {
+    setFcEvents(events.map(e => ({
+      id: e.eventId,
+      title: e.title,
+      start: `${e.date}T${e.start}`,
+      end: e.end ? `${e.date}T${e.end}` : undefined,
+    })))
+  }, [events]);
 
 	const onResize = () => {
 		const num = selectDaysToShow(window.innerWidth)
@@ -37,6 +41,7 @@ export default function CalendarWeek({ events = [] }) {
         const cur = api.getDate()
         const d = new Date(cur)
         d.setDate(d.getDate() - daysToSkip)
+        setWeeks([d.toISOString().slice(0,10),new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)]) // end date not used
         api.gotoDate(d)
       }
     },
@@ -48,6 +53,8 @@ export default function CalendarWeek({ events = [] }) {
         const cur = api.getDate()
         const d = new Date(cur)
         d.setDate(d.getDate() + daysToSkip)
+        setWeeks([d.toISOString().slice(0,10),new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)]) // end date not used
+
         api.gotoDate(d)
       }
     }

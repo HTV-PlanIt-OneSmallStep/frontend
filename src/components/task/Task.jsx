@@ -2,8 +2,9 @@ import React from 'react';
 import './Task.css';
 import SubtaskPill from './SubtaskPill';
 import { sampleTask, sampleSubtasks } from '../../util/constants'
-import { useState } from 'react';
-//import { getSubtaskByTaskId } from '../../api/logic';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getSubtasksByTaskId, getTaskById } from '../../api/logic';
 
 function isOverdue(dueDate) {
   return new Date(dueDate) < new Date();
@@ -11,19 +12,32 @@ function isOverdue(dueDate) {
 
 const Task = ({ taskId }) => {
   const { name, context: description } = sampleTask; // getTask(taskId);
-  const subtasks = useState([])
-  
+  const [subtasks, setSubtasks] = useState([])
+  const { scheduleId } = useParams();
+  const [task, setTask] = useState({});
   const refreshSubtasks = async () => {
-    const t = await getSubtasksById(taskId);
-
+    if (!taskId) return;
+    const t = await getSubtasksByTaskId(scheduleId, taskId);
+    console.log
+    setSubtasks(t || []);
   }
+
+  const refreshTask = async () => {
+    if (!taskId) return;
+    const t = await getTaskById(scheduleId, taskId);
+    setTask(t || {});
+    console.log(t)
+  }
+
   useEffect(() => {
+    refreshTask()
+    refreshSubtasks()
   }, [taskId]);
 
   return (
     <div className="task-outer">
-      <h2>{name}</h2>
-      <p>{description}</p>
+      <h2>{task.name}</h2>
+      <p>{task.context}</p>
       <h4>Subtasks</h4>
       <div className="subtask-list">
         {subtasks?.map(subtask => (

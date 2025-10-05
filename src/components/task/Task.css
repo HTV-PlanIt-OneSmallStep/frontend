@@ -1,0 +1,12 @@
+.task-outer {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 0 0 30%;
+  box-sizing: border-box;
+}
+
+.subtask-list {
+  display: flex;
+  flex-direction: column;
+}

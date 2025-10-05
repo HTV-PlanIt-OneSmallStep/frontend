@@ -6,7 +6,8 @@ getSubtaskById
 setTask
 setSubTask
 createSchedule
-updateSubtaskById`
+updateSubtaskById
+generatePlan`
 
 const parseDateAndTime = (s) => {
     const timestamp = s; // example
@@ -231,6 +232,16 @@ export const createSchedule = async () => {
     return (await apiTaskClient.post('/')).data;
 }
 
+export const generatePlan = async (scheduleId, name, context, startDateTime, deadline) => {
+    const res = await apiTaskClient.post(`${scheduleId}/generate`, {
+        name: name, 
+        context: context,
+        deadline: deadline,
+        startDate: startDateTime
+    })
+    return res.data;
+}
+
 export default {
     getTasksInTimestampRange, 
     getTasksForToday,
@@ -240,5 +251,6 @@ export default {
     createSubtask,
     createSchedule,
     setTask,
-    setSubtask
+    setSubtask,
+    generatePlan
 }

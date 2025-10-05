@@ -58,6 +58,47 @@ export default function CalendarWeek({ events = [] }) {
 		scrollTo9am();
   }
 
+  // track last highlighted event id to clear highlight
+  const lastHighlightedId = useRef(null)
+  useEffect(() => {
+    function handleHighlight(e) {
+      const id = e?.detail?.id
+      if (!id) return
+      const api = calendarRef.current?.getApi()
+      if (!api) return
+
+      // clear previous highlight
+      if (lastHighlightedId.current) {
+        const prev = api.getEventById(String(lastHighlightedId.current))
+        if (prev && typeof prev.setProp === 'function') {
+          // reset to default
+          prev.setProp('backgroundColor', '')
+          prev.setProp('borderColor', '')
+        } else {
+          // fallback: remove DOM class
+          const prevEl = document.querySelector(`.fc-event[data-event-id="${lastHighlightedId.current}"]`)
+          if (prevEl) prevEl.classList.remove('highlighted-event')
+        }
+      }
+
+      const ev = api.getEventById(String(id))
+      if (ev && typeof ev.setProp === 'function') {
+        ev.setProp('backgroundColor', '#ffef8a')
+        ev.setProp('borderColor', '#ffcf33')
+      } else {
+        // fallback: add DOM class to event element(s)
+        const el = document.querySelectorAll(`.fc-event[data-event-id="${id}"]`)
+        el.forEach(n => n.classList.add('highlighted-event'))
+      }
+
+      lastHighlightedId.current = id
+    }
+
+    window.addEventListener('highlight-event', handleHighlight)
+    return () => window.removeEventListener('highlight-event', handleHighlight)
+  }, [])
+
+
   return (
     <div className="fc-wrapper">
       <FullCalendar

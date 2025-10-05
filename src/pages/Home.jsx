@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Form from '../components/form.jsx';
+import Form from '../components/form/form.jsx';
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);

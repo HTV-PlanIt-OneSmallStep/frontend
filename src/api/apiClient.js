@@ -11,6 +11,6 @@ export const apiClient = axios.create(
 export const apiTaskClient = axios.create(
     {
         baseURL: `http://localhost:3000/api/plan/schedule`,
-        timeout: 4000
+        timeout: 35000
     }
 )

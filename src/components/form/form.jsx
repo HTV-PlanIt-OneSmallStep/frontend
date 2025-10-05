@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import './form.css';
 import './../../index.css';
+import { generatePlan } from '../../api/logic';
 
 export default function Form({ closeForm, showForm }) {
 
@@ -14,6 +14,8 @@ export default function Form({ closeForm, showForm }) {
         endTime: "",
         context: ""
     });
+
+    const [isLoading, setIsLoading] = useState(false);
 
     function handleDeadline() {
         setFormData(prevData => ({
@@ -69,6 +71,35 @@ export default function Form({ closeForm, showForm }) {
         return day;
     }
 
+    function handleContextChange() {
+        setFormData(prevData => ({
+            ...prevData,
+            context: document.getElementById("context").value
+        }));
+    }
+
+    const generateNewPlan = async (event, taskName, context, startDate, startTime, endDate, endTime)=> {
+        event.preventDefault();
+        setIsLoading(true);
+        if (endDate === "" | endDate === null) {
+            endDate = startDate;
+        }
+
+        const deadline = endDate && endTime ? `${endDate}T${endTime}` : endDate ? `${endDate}T23:59` : null;
+        const startDateTime = startDate && startTime ? `${startDate}T${startTime}` : startDate ? `${startDate}T23:59` : null;
+        console.log("deadline:", deadline)  
+        console.log("endDate:", endDate)
+        console.log("endTime:", endTime)
+        const scheduleId = window.localStorage.getItem('planner-scheduleId');
+        try {
+            await generatePlan(scheduleId, taskName, context, startDateTime, deadline);
+        } catch (error) {
+            console.error("Error generating plan:", error);
+        } finally {
+            setIsLoading(false);
+          }
+    } 
+
     return (
         <form className={showForm ? "add-task-form" : "add-task-form hidden"}>
             <h3 className='homepage-title'>Add Task</h3>
@@ -114,12 +145,14 @@ export default function Form({ closeForm, showForm }) {
             <div className='task-section'>
                 <label htmlFor="context" className='input-label'><b>Context</b></label>
                 <p>What details about this event/project can you give?</p>
-                <textarea id="context" name="context" rows="5" cols="50" />
+                <textarea id="context" name="context" rows="5" cols="50" onInput={handleContextChange} />
             </div>
             <div className='task-section'>
-                <NavLink to="/calendar" className={({isActive}) => isActive ? 'active' : ''}>
-                    Generate Schedule
-                </NavLink>
+                <button type="button" className={({isActive}) => isActive ? 'active' : ''} 
+                    onClick={() => generateNewPlan(event, formData.taskName, formData.context, formData.startDate, formData.startTime, formData.endDate, formData.endTime)}
+                    disabled={isLoading}>
+                    {isLoading ? 'Loading...' : 'Generate Schedule'}
+                </button>
                 <button type="button" className="Close" onClick={closeForm}>Close Form</button>
             </div>
         </form>

@@ -41,7 +41,8 @@ export const getTasksInTimestampRange = async (scheduleId, s, e) => {
                         end: '23:59',
                         title: task.name,
                         description: task.description,
-                        parent: task.parent
+                        parent: task.parent,
+                        ...task
                     }
                 )
                 acc.push(
@@ -52,7 +53,8 @@ export const getTasksInTimestampRange = async (scheduleId, s, e) => {
                         end: dateSplitE[1],
                         title: task.name,
                         description: task.description,
-                        parent: task.parent
+                        parent: task.parent,
+                        ...task
                     }
                 )
             } else {
@@ -64,7 +66,8 @@ export const getTasksInTimestampRange = async (scheduleId, s, e) => {
                         end: dateSplitE[1],
                         title: task.name,
                         description: task.description,
-                        parent: task.parent
+                        parent: task.parent,
+                        ...task
                     }
                 )
             }

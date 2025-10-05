@@ -2,7 +2,8 @@ import React from 'react';
 import './Task.css';
 import SubtaskPill from './SubtaskPill';
 import { sampleTask, sampleSubtasks } from '../../util/constants'
-
+import { useState } from 'react';
+//import { getSubtaskByTaskId } from '../../api/logic';
 
 function isOverdue(dueDate) {
   return new Date(dueDate) < new Date();
@@ -10,7 +11,14 @@ function isOverdue(dueDate) {
 
 const Task = ({ taskId }) => {
   const { name, context: description } = sampleTask; // getTask(taskId);
-  const subtasks = sampleSubtasks; // getSubtasksById(taskId);
+  const subtasks = useState([])
+  
+  const refreshSubtasks = async () => {
+    const t = await getSubtasksById(taskId);
+
+  }
+  useEffect(() => {
+  }, [taskId]);
 
   return (
     <div className="task-outer">

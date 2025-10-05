@@ -107,6 +107,7 @@ button:focus-visible {
     font-family: 'Trebuchet MS', sans-serif;
     display: flex;
     width: fit-content;
+    margin-left: 43%;
     height: fit-content;
     align-items: center;
     justify-content: center;;

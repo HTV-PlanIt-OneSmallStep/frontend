@@ -103,6 +103,7 @@
     border-radius: 10px;
     box-sizing: border-box;
     transition: 0.2s ease-in;
+    margin-left: 50%;
 }
 .toggle label:after {
     content: '';
@@ -116,6 +117,7 @@
     background: #fff;
     box-sizing: border-box;
     transition: 0.2s ease-in;
+    margin-left: 50%;
 }
 .toggle input[type="checkbox"]:checked + label:before {
     background: #baa9f2;

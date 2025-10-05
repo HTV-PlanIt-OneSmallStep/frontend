@@ -24,7 +24,7 @@ export default function Calendar() {
     const tasks = await getTasksInTimestampRange(scheduleId, week[0], week[1]);
     console.log(tasks)
     setEvents(tasks)
-    setTaskId(!taskId && tasks.length > 0 ? tasks[tasks.length - 1]?.parent.id : taskId);
+    //setTaskId(!taskId && tasks.length > 0 ? tasks[tasks.length - 1]?.parent.id : taskId);
   }
 
   useEffect(() => {
@@ -37,9 +37,9 @@ export default function Calendar() {
 
   return (
     <div>
-      <nav className="page-nav">
+      <nav className="page-nav" style={{ color: 'white'}}>
         <NavLink to="/" className={({isActive}) => isActive ? 'active' : ''}>
-          Home
+          <div style={{ color: 'white' }}>Home</div>
         </NavLink>
       </nav>
       <div className='row' style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16}}>

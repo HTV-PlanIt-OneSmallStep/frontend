@@ -19,6 +19,11 @@
   color: white !important;
 }
 
+/* The time slots (empty cells) */
+.fc .fc-timegrid-slot {
+  border: none !important;       /* remove borders */
+  border-bottom: none !important; /* optional: remove bottom lines */
+}
 
 .fc .fc-col-header-cell, .fc .fc-timegrid-axis {
   background-color: inherit;  /* dark gray background */

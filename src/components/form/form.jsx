@@ -92,12 +92,13 @@ export default function Form({ closeForm, showForm }) {
         console.log("endTime:", endTime)
         const scheduleId = window.localStorage.getItem('planner-scheduleId');
         try {
-            await generatePlan(scheduleId, taskName, context, startDateTime, deadline);
+            await generatePlan(scheduleId, taskName, context, startDateTime, deadline)
+            setIsLoading(false);
+            closeForm();
+              
         } catch (error) {
             console.error("Error generating plan:", error);
-        } finally {
-            setIsLoading(false);
-          }
+        } 
     } 
 
     return (

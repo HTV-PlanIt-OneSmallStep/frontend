@@ -233,12 +233,13 @@ export const createSchedule = async () => {
 }
 
 export const generatePlan = async (scheduleId, name, context, startDateTime, deadline) => {
-    return (await apiTaskClient.post(`${scheduleId}/generate`, {
+    const res = await apiTaskClient.post(`${scheduleId}/generate`, {
         name: name, 
         context: context,
         deadline: deadline,
         startDate: startDateTime
-    }).data )
+    })
+    return res.data;
 }
 
 export default {
